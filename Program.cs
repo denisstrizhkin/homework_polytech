@@ -20,8 +20,21 @@ class Program {
 
 	static void Sort(int[] arr) 
 	{
-		Array.Sort(arr);
-	}
+		int dp;//дополнитлъная переменная 
+		for (int i=0; i < arr.Length; i++)
+        {
+            for (int j = i + 1; j < arr.Length; j++)
+            {
+                if (arr[i] > arr[j])
+                {
+					dp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = dp;
+                }
+            }
+        }
+		
+    }
 
 	static void PrintArray(int[] arr) {
 		foreach(int el in arr) {

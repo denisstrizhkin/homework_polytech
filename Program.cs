@@ -20,20 +20,40 @@ class Program {
 
 	static void Sort(int[] arr) 
 	{
-		int n = arr.Length;
- 
-        	for (int i = 0; i < n - 1; i++)
-        	{
-        	    int min_idx = i;
-        	    for (int j = i + 1; j < n; j++)
-        	        if (arr[j] < arr[min_idx])
-        	            min_idx = j;
- 
-        	    int temp = arr[min_idx];
-        	    arr[min_idx] = arr[i];
-        	    arr[i] = temp;
-        	}
+		quicksort(arr, 0, arr.Length - 1);
 	}
+	
+	 static int partition (int[] array, int start, int end) 
+   {
+       int temp;
+       int marker = start;
+       for ( int i = start; i < end; i++ ) 
+       {
+           if ( array[i] < array[end] )
+           {
+               temp = array[marker];
+               array[marker] = array[i];
+               array[i] = temp;
+               marker += 1;
+           }
+       }
+   
+       temp = array[marker];
+       array[marker] = array[end];
+       array[end] = temp; 
+       return marker;
+   }
+
+   static void quicksort (int[] array, int start, int end)
+   {
+       if ( start >= end ) 
+       {
+           return;
+       }
+       int pivot = partition (array, start, end);
+       quicksort (array, start, pivot-1);
+       quicksort (array, pivot+1, end);
+   }
 
 	static void PrintArray(int[] arr) {
 		foreach(int el in arr) {

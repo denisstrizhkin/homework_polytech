@@ -18,8 +18,9 @@ class Program {
 		PrintArray(arr_sorted);
 	}
 
-	static void Sort(int[] arr) {
-
+	static void Sort(int[] arr) 
+	{
+		Array.Sort(arr);
 	}
 
 	static void PrintArray(int[] arr) {

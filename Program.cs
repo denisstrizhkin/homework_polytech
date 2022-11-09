@@ -20,42 +20,72 @@ class Program {
 
 	static void Sort(int[] arr) 
 	{
-		quicksort(arr, 0, arr.Length - 1);
+        sort(arr, 0, arr.Length - 1);
 	}
-	
-	 static int partition (int[] array, int start, int end) 
-   {
-       int temp;
-       int marker = start;
-       for ( int i = start; i < end; i++ ) 
-       {
-           if ( array[i] < array[end] )
-           {
-               temp = array[marker];
-               array[marker] = array[i];
-               array[i] = temp;
-               marker += 1;
-           }
-       }
-   
-       temp = array[marker];
-       array[marker] = array[end];
-       array[end] = temp; 
-       return marker;
-   }
 
-   static void quicksort (int[] array, int start, int end)
-   {
-       if ( start >= end ) 
-       {
-           return;
-       }
-       int pivot = partition (array, start, end);
-       quicksort (array, start, pivot-1);
-       quicksort (array, pivot+1, end);
-   }
+    static void merge(int[] arr, int l, int m, int r)
+    {
+        int n1 = m - l + 1;
+        int n2 = r - m;
 
-	static void PrintArray(int[] arr) {
+        int[] L = new int[n1];
+        int[] R = new int[n2];
+        int i, j;
+
+        for (i = 0; i < n1; ++i)
+            L[i] = arr[l + i];
+        for (j = 0; j < n2; ++j)
+            R[j] = arr[m + 1 + j];
+
+
+        i = 0;
+        j = 0;
+
+        int k = l;
+        while (i < n1 && j < n2)
+        {
+            if (L[i] <= R[j])
+            {
+                arr[k] = L[i];
+                i++;
+            }
+            else
+            {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i < n1)
+        {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+
+        while (j < n2)
+        {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+
+    static void sort(int[] arr, int l, int r)
+    {
+        if (l < r)
+        {
+            int m = l + (r - l) / 2;
+
+            sort(arr, l, m);
+            sort(arr, m + 1, r);
+
+            merge(arr, l, m, r);
+        }
+    }
+
+    static void PrintArray(int[] arr) {
 		foreach(int el in arr) {
 			Console.Write(el + " ");
 		}
